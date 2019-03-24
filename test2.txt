@@ -1,0 +1,2 @@
+this is a txt file that create by command too.
+And there wiil be a copy of this file in dirtest.
