@@ -117,3 +117,78 @@ add GPL
 进入放置克隆repository的目的文件夹
 
 `git clone <SSH>`
+
+## 分支管理
+
+### 1.分支作用
+一个分支上做修改，另一个分支没有影响，dev分支上更改文件，
+不会改变master分支文件，合并分支之后才会该变
+
+### 2.创建分支
++ 创建一个名为dev的分支，并切换
+
+`git checkout -b dev`
+
++ 创建分支
+
+`git branch dev`
+
++ 切换分支
+
+`git checkout dev`
++ 查看分支
+
+`git branch`
+
+### 3.合并分支
++ 切换到master分支才可以合并
+
+`git merge dev`
+### 4.删除分支
+
+`git branch -d dev`
+
+### 5.分支冲突
+当master分支和dev分支都有commit，合并会冲突
+要修改一方的commit继续提交
+
+### 6.分支策略
++ master分支
+> 最为稳定的分支，一般不在上进行修改文件，只进行发布工作
++ dev分支
+> 一般工作都在dev分支进行,完成之后合并到master分支发布
++ dev上的个人分支
+> 完成个人工作之后合并到dev分支
++ 禁用fast forward
+> git merge --no-ff -m “...” 分支名
+> 禁用之后可以使用git log --graph --pretty=oneline --abbrev-commit查看分支历史记录
+
+### 7.Bug分支
+1. 遇到bug需要临时保存工作区
+`git stash`
+2. 新建分支解决bug，并提交
+3. 恢复工作区
++ 单步   
+   + 恢复工作区: `git stash apply`   
+   + 删除stash: `git stash drop`
++ 一步恢复，并删除stash: `git stash pop`
++ 查看stash内容: git stash list
+
+## 标签管理
++ 作用: 与commit绑定，使其更易于管理
+1. 创建标签
+切换到需要打标签的分支
+
+> git tag 标签名   
+> git tag 标签名 commit id   
+> git tag -a 标签名 -m “标签信息”   
+
+2. 管理标签
++ 查看标签: git tag
++ 查看标签信息: git show 标签名
++ 删除标签   
+   + 本地删除: git tag -d 标签名
+   + 远程删除: git push origin ：ref/tags/标签名
++ 推送标签
+   + 单个推送: git push origin 标签名
+   + 全部推送: git push origin -tags
